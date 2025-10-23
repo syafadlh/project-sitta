@@ -1,0 +1,118 @@
+/* ==========================
+   LOGIN PAGE STYLE
+   ========================== */
+:root {
+  --primary: #004aad;
+  --secondary: #fdb813;
+  --shadow: rgba(0,0,0,0.15);
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--primary), #2d73ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  background: white;
+  width: 340px;
+  padding: 40px 35px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 6px 20px var(--shadow);
+  animation: fadeIn 0.7s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(25px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+.login-container img {
+  margin-bottom: 15px;
+}
+
+.login-container h2 {
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.login-container input:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 5px var(--secondary);
+}
+
+.login-container button {
+  background: linear-gradient(90deg, var(--primary), #2d73ff);
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background: var(--secondary);
+  color: #333;
+}
+
+.links {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.links a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.links a:hover {
+  color: var(--secondary);
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 100;
+}
+
+.modal-content {
+  background-color: white;
+  width: 300px;
+  padding: 25px;
+  margin: 10% auto;
+  border-radius: 12px;
+  text-align: center;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #999;
+}
+
+.close:hover {
+  color: var(--primary);
+}
