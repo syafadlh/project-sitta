@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login SITTA</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="login-body">
+  <div class="login-container">
+    <img src="../../assets/logo-ut.png" alt="Logo UT" width="80">
+    <h2>Login SITTA</h2>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="login()">Login</button>
+
+    <div class="links">
+      <a href="#" onclick="openModal('forgotModal')">Lupa Password?</a> |
+      <a href="#" onclick="openModal('registerModal')">Daftar</a>
+    </div>
+  </div>
+
+  <!-- Modal Lupa Password -->
+  <div id="forgotModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('forgotModal')">&times;</span>
+      <h3>Lupa Password</h3>
+      <p>Silakan hubungi admin UT-Daerah untuk reset password.</p>
+    </div>
+  </div>
+
+  <!-- Modal Daftar -->
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('registerModal')">&times;</span>
+      <h3>Form Pendaftaran</h3>
+      <input type="text" placeholder="Nama Lengkap">
+      <input type="email" placeholder="Email">
+      <input type="password" placeholder="Password">
+      <button onclick="alert('Pendaftaran berhasil (simulasi)!')">Daftar</button>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

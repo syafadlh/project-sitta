@@ -1,0 +1,353 @@
+/* ==============================
+   SITTA FRONT-END
+   ============================== */
+
+:root {
+  --primary: #004aad; /* biru UT */
+  --secondary: #fdb813; /* kuning emas */
+  --light: #f9fafc;
+  --dark: #1e2a38;
+  --text: #333;
+  --shadow: rgba(0, 0, 0, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  transition: all 0.3s ease;
+}
+
+body {
+  margin: 0;
+  background-color: var(--light);
+  color: var(--text);
+}
+
+/* ==============================
+   LOGIN PAGE
+   ============================== */
+.login-body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, var(--primary), #2d73ff);
+}
+
+.login-container {
+  background: white;
+  padding: 40px 35px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px var(--shadow);
+  text-align: center;
+  width: 350px;
+  animation: fadeUp 0.7s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-container img {
+  margin-bottom: 15px;
+}
+
+.login-container h2 {
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.login-container input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+}
+
+.login-container input:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 5px var(--secondary);
+}
+
+.login-container button {
+  background: linear-gradient(90deg, var(--primary), #2d73ff);
+  color: white;
+  font-weight: 600;
+  padding: 12px 20px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.login-container button:hover {
+  background: linear-gradient(90deg, #2d73ff, var(--primary));
+  transform: translateY(-2px);
+}
+
+.links {
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+.links a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.links a:hover {
+  color: var(--secondary);
+}
+
+/* ==============================
+   MODAL
+   ============================== */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.modal-content {
+  background-color: white;
+  width: 320px;
+  margin: 10% auto;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px var(--shadow);
+  position: relative;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 22px;
+  color: #999;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: var(--primary);
+}
+
+.modal-content h3 {
+  color: var(--primary);
+}
+
+.modal-content button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background: var(--secondary);
+}
+
+/* ==============================
+   DASHBOARD
+   ============================== */
+header {
+  background: linear-gradient(90deg, var(--primary), #2d73ff);
+  color: white;
+  text-align: center;
+  padding: 25px 0;
+  box-shadow: 0 2px 10px var(--shadow);
+}
+
+header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+#greeting {
+  font-size: 1.1rem;
+  margin-top: 8px;
+  color: var(--secondary);
+  font-weight: 500;
+}
+
+.menu-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 40px 10px;
+  gap: 20px;
+}
+
+.menu-card {
+  background: white;
+  padding: 25px 30px;
+  width: 230px;
+  text-align: center;
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 600;
+  box-shadow: 0 4px 12px var(--shadow);
+  border-top: 4px solid var(--secondary);
+}
+
+.menu-card:hover {
+  transform: scale(1.05);
+  background: #f5f9ff;
+}
+
+/* ==============================
+   TRACKING PAGE
+   ============================== */
+h2 {
+  text-align: center;
+  color: var(--primary);
+  margin-top: 30px;
+}
+
+.tracking-container {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.tracking-container input {
+  padding: 10px;
+  width: 240px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.tracking-container button {
+  padding: 10px 22px;
+  border: none;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.tracking-container button:hover {
+  background-color: var(--secondary);
+  color: var(--dark);
+}
+
+.tracking-result {
+  margin: 30px auto;
+  width: 85%;
+  max-width: 500px;
+  background-color: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px var(--shadow);
+  border-left: 6px solid var(--primary);
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: #eee;
+  border-radius: 20px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.progress-bar div {
+  background: linear-gradient(90deg, var(--primary), #2d73ff);
+  color: white;
+  text-align: center;
+  border-radius: 20px;
+  height: 25px;
+  font-size: 0.9rem;
+}
+
+/* ==============================
+   STOK PAGE
+   ============================== */
+table {
+  width: 85%;
+  margin: 30px auto;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px var(--shadow);
+  overflow: hidden;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 14px;
+  text-align: center;
+}
+
+th {
+  background-color: var(--primary);
+  color: white;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+h3 {
+  text-align: center;
+  margin-top: 25px;
+  color: var(--primary);
+}
+
+input,
+button {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  border: 1px solid #aaa;
+}
+
+button {
+  background: linear-gradient(90deg, var(--primary), #2d73ff);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: var(--secondary);
+  color: var(--dark);
+}
+
+/* ==============================
+   RESPONSIVE DESIGN
+   ============================== */
+@media (max-width: 768px) {
+  .login-container {
+    width: 90%;
+  }
+  .menu-card {
+    width: 80%;
+  }
+  .tracking-result {
+    width: 90%;
+  }
+  table {
+    width: 95%;
+  }
+}
