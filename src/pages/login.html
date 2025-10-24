@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login SITTA</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/login.css">
 </head>
 <body class="login-body">
   <div class="login-container">
     <img src="../../assets/logo-ut1.png" alt="Logo UT" width="150">
     <h2>Login SITTA</h2>
+
     <input type="email" id="email" placeholder="Email" required>
     <input type="password" id="password" placeholder="Password" required>
     <button onclick="login()">Login</button>
@@ -20,7 +21,6 @@
     </div>
   </div>
 
-  <!-- Modal Lupa Password -->
   <div id="forgotModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('forgotModal')">&times;</span>
@@ -29,7 +29,6 @@
     </div>
   </div>
 
-  <!-- Modal Daftar -->
   <div id="registerModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('registerModal')">&times;</span>
@@ -41,6 +40,7 @@
     </div>
   </div>
 
+  <!-- 🔹 Tambahkan ini di bawah semua HTML -->
   <script src="../js/script.js"></script>
 </body>
 </html>

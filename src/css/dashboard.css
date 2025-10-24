@@ -1,0 +1,191 @@
+:root {
+  --primary: #004aad;
+  --highlight: #2d73ff;
+  --secondary: #fdb813;
+  --light: #f4f6f8;
+  --font: 'Poppins', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background-color: #fff;
+}
+
+/* ======== NAVBAR ======== */
+
+.navbar {
+  background: linear-gradient(90deg, var(--primary), var(--highlight));
+  overflow: visible; /* 🔹 ubah dari hidden ke visible */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  position: relative; /* 🔹 tambahkan agar z-index berfungsi */
+  z-index: 1000; /* 🔹 pastikan navbar di atas elemen lain */
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navbar li {
+  position: relative;
+}
+
+.navbar a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  background-color: var(--secondary);
+  color: #333;
+  transition: 0.3s ease;
+}
+
+/* ======== DROPDOWN ======== */
+.dropdown {
+  position: relative;
+  z-index: 1001; /* 🔹 pastikan dropdown di atas konten */
+}
+
+.dropbtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 0.95rem;
+  padding: 14px 20px;
+  font-weight: 500;
+  text-align: left; 
+}
+
+.dropbtn:hover {
+  background-color: var(--secondary);
+  color: #333;
+}
+
+.dropdown-content {
+  display: flex; 
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  top: 45px;
+  z-index: 2000; /* 🔹 dropdown paling atas */
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: flex;  
+  font-weight: 500;
+  font-size: 0.6rem;
+}
+
+.dropdown-content a:hover {
+  background-color: #f0f4ff;
+  color: var(--primary);
+}
+
+/* ======== DASHBOARD CONTENT ======== */
+.dashboard-content {
+  padding: 60px 70px; /* ruang sisi & atas */
+  background: linear-gradient(180deg, #f7faff 0%, var(--light) 100%);
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 🔹 ubah dari center → teks naik ke atas */
+  align-items: flex-start; /* teks rata kiri */
+  gap: 10px; /* 🔹 jarak antar elemen rapi */
+  animation: fadeInUp 0.7s ease both;
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px; /* 🔹 jarak dari navbar, bisa disesuaikan */
+}
+
+
+/* Tambahkan dekorasi bulatan lembut di latar belakang */
+.dashboard-content::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 220px;
+  height: 220px;
+  background: rgba(0, 74, 173, 0.08); /* 🔹 biru transparan */
+  border-radius: 50%;
+}
+
+.dashboard-content::after {
+  content: "";
+  position: absolute;
+  bottom: -90px;
+  left: -90px;
+  width: 250px;
+  height: 250px;
+  background: rgba(253, 184, 19, 0.08); /* 🔹 kuning transparan */
+  border-radius: 50%;
+}
+
+/* Judul */
+.dashboard-content h1 {
+  color: var(--primary);
+  font-size: 2rem; /* 🔹 sedikit lebih besar */
+  margin-bottom: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.1); /* 🔹 halus */
+}
+
+/* Greeting */
+.dashboard-content p {
+  font-weight: 600;
+  color: var(--secondary);
+  font-size: 1.1rem;
+  background-color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  animation: fadeGlow 2s infinite alternate; /* 🔹 efek berdenyut lembut */
+}
+
+/* Animasi masuk */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animasi lembut pada greeting */
+@keyframes fadeGlow {
+  from { box-shadow: 0 0 8px rgba(253,184,19,0.2); }
+  to { box-shadow: 0 0 16px rgba(253,184,19,0.35); }
+}
+
+
+/* ======== RESPONSIVE ======== */
+@media screen and (max-width: 768px) {
+  .navbar ul {
+    flex-direction: column;
+  }
+  .navbar a {
+    text-align: left;
+    padding-left: 25px;
+  }
+  .dropdown-content {
+    position: relative;
+  }
+}

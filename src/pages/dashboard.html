@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard SITTA</title>
+    <link rel="stylesheet" href="../css/dashboard.css" />
+  </head>
+  <body>
+    <!-- Navigasi Utama -->
+    <nav class="navbar">
+      <ul>
+        <li><a href="stok.html">Informasi Bahan Ajar</a></li>
+        <li><a href="tracking.html">Tracking Pengiriman</a></li>
+
+        <!-- Dropdown Laporan -->
+        <li class="dropdown">
+          <button class="dropbtn" onclick="toggleDropdown()">Laporan ▾</button>
+          <div class="dropdown-content" id="laporanDropdown">
+            <a href="#">Monitoring Progress DO Bahan Ajar</a>
+            <a href="#">Rekap Bahan Ajar</a>
+          </div>
+        </li>
+
+        <li><a href="#">Histori Transaksi Bahan Ajar</a></li>
+      </ul>
+    </nav>
+
+    <!-- Konten Dashboard -->
+    <section class="dashboard-content">
+      <h1>Dashboard Aplikasi SITTA</h1>
+      <p id="greeting"></p>
+    </section>
+
+    <script src="../js/script.js"></script>
+    <script>
+      // JavaScript untuk toggle dropdown
+      function toggleDropdown() {
+        const dropdown = document.getElementById('laporanDropdown');
+        dropdown.style.display =
+          dropdown.style.display === 'block' ? 'none' : 'block';
+      }
+
+      // Tutup dropdown jika klik di luar menu
+      window.onclick = function (e) {
+        if (!e.target.matches('.dropbtn')) {
+          const dropdown = document.getElementById('laporanDropdown');
+          if (dropdown && dropdown.style.display === 'block') {
+            dropdown.style.display = 'none';
+          }
+        }
+      };
+    </script>
+  </body>
+</html>
