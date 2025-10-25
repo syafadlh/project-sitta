@@ -1,28 +1,72 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tracking Pengiriman | SITTA</title>
-  <link rel="stylesheet" href="../css/tracking.css">
-</head>
-<body>
-  <header class="tracking-header">
-    <h2>Tracking Pengiriman Bahan Ajar</h2>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tracking Pengiriman | SITTA</title>
+    <link rel="stylesheet" href="../css/tracking.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+  </head>
+  <body>
+    <!-- Navigasi Utama -->
+    <nav class="navbar">
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="stok.html">Informasi Bahan Ajar</a></li>
+        <li><a href="tracking.html">Tracking Pengiriman</a></li>
 
-  <main class="tracking-container">
-    <div class="search-section">
-      <label for="noDO">No. DO/Billing</label>
-      <div class="input-group">
-        <input type="text" id="noDO" placeholder="Masukkan Nomor DO (contoh: DO001)">
-        <button onclick="cariDO()">Lacak</button>
+        <li class="dropdown">
+          <button class="dropbtn" onclick="toggleDropdown()">Laporan ▾</button>
+          <div class="dropdown-content" id="laporanDropdown">
+            <a href="#">Monitoring Progress DO Bahan Ajar</a>
+            <a href="#">Rekap Bahan Ajar</a>
+          </div>
+        </li>
+
+        <!-- 🔹 Tambahkan tombol Login / Logout -->
+        <li class="right">
+          <a href="login.html" class="logout-btn">Logout</a>
+        </li>
+      </ul>
+    </nav>
+    <header class="tracking-header">
+      <h2>Tracking Pengiriman Bahan Ajar</h2>
+    </header>
+
+    <main class="tracking-container">
+      <div class="search-section">
+        <label for="noDO">No. DO/Billing</label>
+        <div class="input-group">
+          <input
+            type="text"
+            id="noDO"
+            placeholder="Masukkan Nomor DO (contoh: DO001)"
+          />
+          <button onclick="cariDO()">Lacak</button>
+        </div>
       </div>
-    </div>
 
-    <div id="hasilTracking" class="tracking-result"></div>
-  </main>
+      <div id="hasilTracking" class="tracking-result"></div>
+    </main>
 
-  <script src="../js/script.js"></script>
-</body>
+    <script src="../js/script.js"></script>
+        <script>
+      // JavaScript untuk toggle dropdown
+      function toggleDropdown() {
+        const dropdown = document.getElementById("laporanDropdown");
+        dropdown.style.display =
+          dropdown.style.display === "block" ? "none" : "block";
+      }
+
+      // Tutup dropdown jika klik di luar menu
+      window.onclick = function (e) {
+        if (!e.target.matches(".dropbtn")) {
+          const dropdown = document.getElementById("laporanDropdown");
+          if (dropdown && dropdown.style.display === "block") {
+            dropdown.style.display = "none";
+          }
+        }
+      };
+    </script>
+  </body>
 </html>

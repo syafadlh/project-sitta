@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informasi Stok Bahan Ajar</title>
+  <link rel="stylesheet" href="../css/stok.css">
+   <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+<body>
+    <!-- Navigasi Utama -->
+    <nav class="navbar">
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="stok.html">Informasi Bahan Ajar</a></li>
+        <li><a href="tracking.html">Tracking Pengiriman</a></li>
+
+        <li class="dropdown">
+          <button class="dropbtn" onclick="toggleDropdown()">Laporan ▾</button>
+          <div class="dropdown-content" id="laporanDropdown">
+            <a href="#">Monitoring Progress DO Bahan Ajar</a>
+            <a href="#">Rekap Bahan Ajar</a>
+          </div>
+        </li>
+
+        <!-- 🔹 Tambahkan tombol Login / Logout -->
+        <li class="right">
+          <a href="login.html" class="logout-btn">Logout</a>
+        </li>
+      </ul>
+    </nav>
+
+  <section class="stok-container">
+    <h2>Informasi Stok Bahan Ajar</h2>
+    <p>Data di bawah ini ditampilkan secara dinamis dari data dummy dan bisa ditambah menggunakan form.</p>
+
+    <table id="tabelStok">
+      <thead>
+        <tr>
+          <th>Kode Lokasi</th>
+          <th>Kode Barang</th>
+          <th>Nama Barang</th>
+          <th>Jenis</th>
+          <th>Edisi</th>
+          <th>Stok</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h3>Tambah Stok Baru</h3>
+    <div class="form-container">
+      <input type="text" id="kodeLokasi" placeholder="Kode Lokasi" />
+      <input type="text" id="kodeBarang" placeholder="Kode Barang" />
+      <input type="text" id="namaBarang" placeholder="Nama Barang" />
+      <input type="text" id="jenisBarang" placeholder="Jenis Barang" />
+      <input type="number" id="edisi" placeholder="Edisi" />
+      <input type="number" id="stok" placeholder="Jumlah Stok" />
+      <button class="btn-primary" onclick="tambahBaris()">Tambah</button>
+    </div>
+  </section>
+
+  <script src="../js/script.js"></script>
+      <script>
+      // JavaScript untuk toggle dropdown
+      function toggleDropdown() {
+        const dropdown = document.getElementById("laporanDropdown");
+        dropdown.style.display =
+          dropdown.style.display === "block" ? "none" : "block";
+      }
+
+      // Tutup dropdown jika klik di luar menu
+      window.onclick = function (e) {
+        if (!e.target.matches(".dropbtn")) {
+          const dropdown = document.getElementById("laporanDropdown");
+          if (dropdown && dropdown.style.display === "block") {
+            dropdown.style.display = "none";
+          }
+        }
+      };
+    </script>
+</body>
+</html>

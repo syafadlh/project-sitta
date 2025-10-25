@@ -94,3 +94,88 @@ const dataTracking = [
     ]
   }
 ];
+
+// ==============================
+// DATA DUMMY BAHAN AJAR
+// ==============================
+const dataBahanAjar = [
+  {
+    kodeLokasi: "0TMP01",
+    kodeBarang: "ASIP4301",
+    namaBarang: "Pengantar Ilmu Komunikasi",
+    jenisBarang: "BMP",
+    edisi: "2",
+    stok: 548,
+  },
+  {
+    kodeLokasi: "0SBY02",
+    kodeBarang: "ASIP4302",
+    namaBarang: "Dasar-Dasar Public Relations",
+    jenisBarang: "BMP",
+    edisi: "1",
+    stok: 321,
+  },
+];
+
+// ==============================
+// MENAMPILKAN DATA DUMMY KE TABEL
+// ==============================
+function tampilkanData() {
+  const tabel = document.getElementById("tabelStok")?.getElementsByTagName("tbody")[0];
+  if (!tabel) return; // jika bukan halaman stok, keluar
+
+  tabel.innerHTML = ""; // kosongkan tabel
+
+  dataBahanAjar.forEach(item => {
+    const row = tabel.insertRow();
+    row.innerHTML = `
+      <td>${item.kodeLokasi}</td>
+      <td>${item.kodeBarang}</td>
+      <td>${item.namaBarang}</td>
+      <td>${item.jenisBarang}</td>
+      <td>${item.edisi}</td>
+      <td>${item.stok}</td>
+    `;
+  });
+}
+
+// ==============================
+// MENAMBAH BARIS BARU
+// ==============================
+function tambahBaris() {
+  const kodeLokasi = document.getElementById("kodeLokasi").value;
+  const kodeBarang = document.getElementById("kodeBarang").value;
+  const namaBarang = document.getElementById("namaBarang").value;
+  const jenisBarang = document.getElementById("jenisBarang").value;
+  const edisi = document.getElementById("edisi").value;
+  const stok = document.getElementById("stok").value;
+
+  if (!kodeLokasi || !kodeBarang || !namaBarang || !jenisBarang || !edisi || !stok) {
+    alert("Semua kolom harus diisi!");
+    return;
+  }
+
+  // Tambahkan data baru ke array
+  dataBahanAjar.push({
+    kodeLokasi,
+    kodeBarang,
+    namaBarang,
+    jenisBarang,
+    edisi,
+    stok,
+  });
+
+  tampilkanData(); // perbarui tampilan tabel
+
+  alert("Data stok baru berhasil ditambahkan!");
+  document.querySelectorAll(".form-container input").forEach(i => i.value = "");
+}
+
+// ==============================
+// OTOMATIS JALANKAN SAAT HALAMAN DIMUAT
+// ==============================
+document.addEventListener("DOMContentLoaded", function() {
+  if (document.getElementById("tabelStok")) {
+    tampilkanData();
+  }
+});

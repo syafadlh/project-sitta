@@ -71,14 +71,14 @@ body {
 }
 
 .dropdown-content {
-  display: flex; 
+  display: none;
   position: absolute;
   background-color: white;
   min-width: 200px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   border-radius: 6px;
   top: 45px;
-  z-index: 2000; /* 🔹 dropdown paling atas */
+  z-index: 2000;
 }
 
 .dropdown-content a {
