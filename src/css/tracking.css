@@ -3,15 +3,36 @@
   --highlight: #2d73ff;
   --secondary: #fdb813;
   --light: #f9fbff;
-  --font: 'Poppins', sans-serif;
+  --darknav: #012b66; 
+  --font: "Poppins", sans-serif;
 }
 
 /* ======== BASE ======== */
 body {
   font-family: var(--font);
-  background-color: var(--light);
+  background: linear-gradient(180deg, #f7faff 0%, var(--light) 100%);
   margin: 0;
   padding: 0;
+  animation: fadeIn 0.8s ease;
+}
+
+/* ======== NAVBAR (lebih gelap dari header) ======== */
+.navbar {
+  background: var(--darknav);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar a {
+  transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+  background-color: var(--secondary);
+  color: #333;
+  border-radius: 6px;
 }
 
 /* ======== HEADER ======== */
@@ -19,18 +40,41 @@ body {
   background: linear-gradient(90deg, var(--primary), var(--highlight));
   color: white;
   text-align: center;
-  padding: 20px 0;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 40px 0 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border-bottom: 4px solid var(--secondary);
+  position: relative;
+}
+
+.tracking-header h2 {
+  font-size: 2rem;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Animasi Header */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ======== CONTAINER ======== */
 .tracking-container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 50px auto;
   background: #fff;
-  padding: 30px;
+  padding: 35px 40px;
   border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  animation: fadeUp 0.7s ease both;
 }
 
 /* ======== INPUT SECTION ======== */
@@ -40,7 +84,7 @@ body {
 
 .search-section label {
   font-weight: 600;
-  color: #333;
+  color: var(--primary);
   display: block;
   margin-bottom: 8px;
 }
@@ -53,21 +97,22 @@ body {
 .input-group input {
   flex: 1;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1.8px solid var(--highlight);
   border-radius: 8px;
   font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
 .input-group input:focus {
-  border-color: var(--highlight);
-  box-shadow: 0 0 4px var(--highlight);
+  border-color: var(--secondary);
+  box-shadow: 0 0 6px rgba(253, 184, 19, 0.4);
 }
 
 .input-group button {
-  background: var(--secondary);
-  color: #222;
+  background: linear-gradient(90deg, var(--primary), var(--highlight));
+  color: white;
   border: none;
-  padding: 12px 20px;
+  padding: 12px 22px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
@@ -75,37 +120,38 @@ body {
 }
 
 .input-group button:hover {
-  background: var(--highlight);
-  color: white;
+  background: var(--secondary);
+  color: #222;
 }
 
 /* ======== HASIL CARD ======== */
 .tracking-card {
-  background-color: var(--primary);
+  background: linear-gradient(135deg, var(--primary), #1b61d1);
   color: white;
-  padding: 18px 20px;
+  padding: 20px 24px;
   border-radius: 12px;
-  margin-top: 25px;
-  line-height: 1.5;
+  margin-top: 30px;
+  line-height: 1.6;
   position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .tracking-card h3 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
 }
 
 .tracking-card p {
   margin: 3px 0;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   opacity: 0.95;
 }
 
 .tracking-card small {
   position: absolute;
-  top: 15px;
-  right: 20px;
+  top: 16px;
+  right: 22px;
   font-size: 0.85rem;
   color: #e0e0e0;
 }
@@ -114,21 +160,21 @@ body {
 .timeline {
   margin-top: 25px;
   border-left: 3px solid var(--secondary);
-  padding-left: 20px;
+  padding-left: 25px;
   position: relative;
 }
 
 .timeline-item {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .timeline-item::before {
   content: "●";
   color: var(--secondary);
-  font-size: 1rem;
+  font-size: 1.1rem;
   position: absolute;
-  left: -13px;
+  left: -14px;
   top: 0;
   background: white;
   border-radius: 50%;
@@ -137,12 +183,48 @@ body {
 .timeline-item p {
   margin: 3px 0;
   color: #333;
-  font-size: 0.92rem;
+  font-size: 0.94rem;
 }
 
 .timeline-item span {
   display: block;
-  color: #666;
+  color: #777;
   font-size: 0.85rem;
   margin-top: 2px;
+}
+
+/* ======== ANIMASI ======== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ======== RESPONSIVE ======== */
+@media screen and (max-width: 768px) {
+  .tracking-container {
+    padding: 25px;
+  }
+
+  .input-group {
+    flex-direction: column;
+  }
+
+  .input-group button {
+    width: 100%;
+  }
 }

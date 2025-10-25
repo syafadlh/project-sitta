@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Informasi Stok Bahan Ajar</title>
-  <link rel="stylesheet" href="../css/stok.css">
-   <link rel="stylesheet" href="../css/dashboard.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informasi Stok Bahan Ajar</title>
+    <link rel="stylesheet" href="../css/stok.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+  </head>
+  <body>
     <!-- Navigasi Utama -->
     <nav class="navbar">
       <ul>
         <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="stok.html">Informasi Bahan Ajar</a></li>
+        <li><a href="stok.html" class="active">Informasi Bahan Ajar</a></li>
         <li><a href="tracking.html">Tracking Pengiriman</a></li>
-
         <li class="dropdown">
           <button class="dropbtn" onclick="toggleDropdown()">Laporan ▾</button>
           <div class="dropdown-content" id="laporanDropdown">
@@ -22,62 +21,85 @@
             <a href="#">Rekap Bahan Ajar</a>
           </div>
         </li>
-
-        <!-- 🔹 Tambahkan tombol Login / Logout -->
         <li class="right">
           <a href="login.html" class="logout-btn">Logout</a>
         </li>
       </ul>
     </nav>
 
-  <section class="stok-container">
-    <h2>Informasi Stok Bahan Ajar</h2>
-    <p>Data di bawah ini ditampilkan secara dinamis dari data dummy dan bisa ditambah menggunakan form.</p>
+    <!-- Header -->
+    <header class="stok-header">
+      <h1>Informasi Stok Bahan Ajar</h1>
+    </header>
 
-    <table id="tabelStok">
-      <thead>
-        <tr>
-          <th>Kode Lokasi</th>
-          <th>Kode Barang</th>
-          <th>Nama Barang</th>
-          <th>Jenis</th>
-          <th>Edisi</th>
-          <th>Stok</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <!-- Container -->
+    <section class="stok-container">
+      <table id="tabelStok">
+        <thead>
+          <tr>
+            <th>Kode Lokasi</th>
+            <th>Kode Barang</th>
+            <th>Nama Barang</th>
+            <th>Jenis</th>
+            <th>Edisi</th>
+            <th>Stok</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
 
-    <h3>Tambah Stok Baru</h3>
-    <div class="form-container">
-      <input type="text" id="kodeLokasi" placeholder="Kode Lokasi" />
-      <input type="text" id="kodeBarang" placeholder="Kode Barang" />
-      <input type="text" id="namaBarang" placeholder="Nama Barang" />
-      <input type="text" id="jenisBarang" placeholder="Jenis Barang" />
-      <input type="number" id="edisi" placeholder="Edisi" />
-      <input type="number" id="stok" placeholder="Jumlah Stok" />
-      <button class="btn-primary" onclick="tambahBaris()">Tambah</button>
+      <div style="margin-top: 30px">
+        <button class="btn-primary" onclick="openModal()">
+          + Tambah Stok Baru
+        </button>
+      </div>
+    </section>
+
+    <!-- POPUP MODAL -->
+    <div id="popupModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>Tambah Stok Baru</h3>
+        <div class="form-container">
+          <input type="text" id="kodeLokasi" placeholder="Kode Lokasi" />
+          <input type="text" id="kodeBarang" placeholder="Kode Barang" />
+          <input type="text" id="namaBarang" placeholder="Nama Barang" />
+          <input type="text" id="jenisBarang" placeholder="Jenis Barang" />
+          <input type="number" id="edisi" placeholder="Edisi" />
+          <input type="number" id="stok" placeholder="Jumlah Stok" />
+          <button class="btn-primary" onclick="tambahBaris()">Simpan</button>
+        </div>
+      </div>
     </div>
-  </section>
 
-  <script src="../js/script.js"></script>
-      <script>
-      // JavaScript untuk toggle dropdown
+    <script src="../js/script.js"></script>
+    <script>
+      // Dropdown
       function toggleDropdown() {
         const dropdown = document.getElementById("laporanDropdown");
         dropdown.style.display =
           dropdown.style.display === "block" ? "none" : "block";
       }
 
-      // Tutup dropdown jika klik di luar menu
       window.onclick = function (e) {
-        if (!e.target.matches(".dropbtn")) {
-          const dropdown = document.getElementById("laporanDropdown");
-          if (dropdown && dropdown.style.display === "block") {
-            dropdown.style.display = "none";
-          }
+        const dropdown = document.getElementById("laporanDropdown");
+        const modal = document.getElementById("popupModal");
+        if (
+          !e.target.matches(".dropbtn") &&
+          dropdown.style.display === "block"
+        ) {
+          dropdown.style.display = "none";
         }
+        if (e.target === modal) closeModal();
       };
+
+      // Modal Functions
+      function openModal() {
+        document.getElementById("popupModal").style.display = "flex";
+      }
+      function closeModal() {
+        document.getElementById("popupModal").style.display = "none";
+      }
     </script>
-</body>
+  </body>
 </html>

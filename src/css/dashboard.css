@@ -3,7 +3,7 @@
   --highlight: #2d73ff;
   --secondary: #fdb813;
   --light: #f4f6f8;
-  --font: 'Poppins', sans-serif;
+  --font: "Poppins", sans-serif;
 }
 
 body {
@@ -16,10 +16,10 @@ body {
 
 .navbar {
   background: linear-gradient(90deg, var(--primary), var(--highlight));
-  overflow: visible; /* 🔹 ubah dari hidden ke visible */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  position: relative; /* 🔹 tambahkan agar z-index berfungsi */
-  z-index: 1000; /* 🔹 pastikan navbar di atas elemen lain */
+  overflow: visible; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: relative; 
+  z-index: 1000; 
 }
 
 .navbar ul {
@@ -51,7 +51,7 @@ body {
 /* ======== DROPDOWN ======== */
 .dropdown {
   position: relative;
-  z-index: 1001; /* 🔹 pastikan dropdown di atas konten */
+  z-index: 1001; 
 }
 
 .dropbtn {
@@ -62,7 +62,7 @@ body {
   font-size: 0.95rem;
   padding: 14px 20px;
   font-weight: 500;
-  text-align: left; 
+  text-align: left;
 }
 
 .dropbtn:hover {
@@ -75,7 +75,7 @@ body {
   position: absolute;
   background-color: white;
   min-width: 200px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   border-radius: 6px;
   top: 45px;
   z-index: 2000;
@@ -85,7 +85,7 @@ body {
   color: #333;
   padding: 10px 16px;
   text-decoration: none;
-  display: flex;  
+  display: flex;
   font-weight: 500;
   font-size: 0.6rem;
 }
@@ -97,20 +97,19 @@ body {
 
 /* ======== DASHBOARD CONTENT ======== */
 .dashboard-content {
-  padding: 60px 70px; /* ruang sisi & atas */
+  padding: 60px 70px; 
   background: linear-gradient(180deg, #f7faff 0%, var(--light) 100%);
   min-height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* 🔹 ubah dari center → teks naik ke atas */
-  align-items: flex-start; /* teks rata kiri */
-  gap: 10px; /* 🔹 jarak antar elemen rapi */
+  justify-content: flex-start; 
+  align-items: flex-start; 
+  gap: 10px; 
   animation: fadeInUp 0.7s ease both;
   position: relative;
   overflow: hidden;
-  padding-top: 80px; /* 🔹 jarak dari navbar, bisa disesuaikan */
+  padding-top: 80px; 
 }
-
 
 /* Tambahkan dekorasi bulatan lembut di latar belakang */
 .dashboard-content::before {
@@ -120,7 +119,7 @@ body {
   right: -80px;
   width: 220px;
   height: 220px;
-  background: rgba(0, 74, 173, 0.08); /* 🔹 biru transparan */
+  background: rgba(0, 74, 173, 0.08); 
   border-radius: 50%;
 }
 
@@ -131,18 +130,18 @@ body {
   left: -90px;
   width: 250px;
   height: 250px;
-  background: rgba(253, 184, 19, 0.08); /* 🔹 kuning transparan */
+  background: rgba(253, 184, 19, 0.08); 
   border-radius: 50%;
 }
 
 /* Judul */
 .dashboard-content h1 {
   color: var(--primary);
-  font-size: 2rem; /* 🔹 sedikit lebih besar */
+  font-size: 2rem; 
   margin-bottom: 10px;
   font-weight: 700;
   letter-spacing: 0.5px;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.1); /* 🔹 halus */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
 }
 
 /* Greeting */
@@ -153,8 +152,8 @@ body {
   background-color: #fff;
   padding: 8px 14px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  animation: fadeGlow 2s infinite alternate; /* 🔹 efek berdenyut lembut */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  animation: fadeGlow 2s infinite alternate; 
 }
 
 /* Animasi masuk */
@@ -171,10 +170,13 @@ body {
 
 /* Animasi lembut pada greeting */
 @keyframes fadeGlow {
-  from { box-shadow: 0 0 8px rgba(253,184,19,0.2); }
-  to { box-shadow: 0 0 16px rgba(253,184,19,0.35); }
+  from {
+    box-shadow: 0 0 8px rgba(253, 184, 19, 0.2);
+  }
+  to {
+    box-shadow: 0 0 16px rgba(253, 184, 19, 0.35);
+  }
 }
-
 
 /* ======== RESPONSIVE ======== */
 @media screen and (max-width: 768px) {

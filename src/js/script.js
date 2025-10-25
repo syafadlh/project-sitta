@@ -6,7 +6,6 @@ function login() {
   window.location.href = "dashboard.html";
 }
 
-
 // ======= GREETING OTOMATIS =======
 if (document.getElementById("greeting")) {
   const jam = new Date().getHours();
@@ -23,7 +22,7 @@ function cariDO() {
   const hasil = document.getElementById("hasilTracking");
   hasil.innerHTML = "";
 
-  const data = dataTracking.find(d => d.noDO === noDO);
+  const data = dataTracking.find((d) => d.noDO === noDO);
 
   if (!data) {
     alert("Nomor DO tidak ditemukan");
@@ -45,7 +44,7 @@ function cariDO() {
   const hasil = document.getElementById("hasilTracking");
   hasil.innerHTML = "";
 
-  const data = dataTracking.find(item => item.noDO === noDO);
+  const data = dataTracking.find((item) => item.noDO === noDO);
 
   if (!data) {
     hasil.innerHTML = `<p style="color:red;text-align:center;">Nomor DO tidak ditemukan</p>`;
@@ -62,12 +61,16 @@ function cariDO() {
     </div>
 
     <div class="timeline">
-      ${data.perjalanan.map(step => `
+      ${data.perjalanan
+        .map(
+          (step) => `
         <div class="timeline-item">
           <p><strong>${step.keterangan}</strong></p>
           <span>${step.tanggal} ${step.waktu}</span>
         </div>
-      `).join('')}
+      `
+        )
+        .join("")}
     </div>
   `;
 }
@@ -83,50 +86,97 @@ const dataTracking = [
     tanggal: "2025-03-10",
     waktu: "15:56:02",
     perjalanan: [
-      { keterangan: "Selesai antar di MADIUN (Diterima oleh FAI EKA)", tanggal: "2025-03-20", waktu: "13:34:59" },
-      { keterangan: "Proses antar di MADIUN", tanggal: "2025-03-20", waktu: "09:05:06" },
-      { keterangan: "Diteruskan ke Kantor Antaran MADIUN", tanggal: "2025-03-19", waktu: "20:03:46" },
-      { keterangan: "Tiba di Hub SPP SURABAYA", tanggal: "2025-03-18", waktu: "21:05:42" },
-      { keterangan: "Diteruskan ke Hub SPP SURABAYA", tanggal: "2025-03-18", waktu: "13:29:06" },
-      { keterangan: "Diteruskan ke Kantor Antaran SIDOARJO", tanggal: "2025-03-18", waktu: "09:22:14" },
-      { keterangan: "Tiba di Hub SURABAYA", tanggal: "2025-03-18", waktu: "07:02:22" },
-      { keterangan: "Pengiriman di loket SURABAYA", tanggal: "2025-03-15", waktu: "15:56:02" }
-    ]
-  }
+      {
+        keterangan: "Selesai antar di MADIUN (Diterima oleh FAI EKA)",
+        tanggal: "2025-03-20",
+        waktu: "13:34:59",
+      },
+      {
+        keterangan: "Proses antar di MADIUN",
+        tanggal: "2025-03-20",
+        waktu: "09:05:06",
+      },
+      {
+        keterangan: "Diteruskan ke Kantor Antaran MADIUN",
+        tanggal: "2025-03-19",
+        waktu: "20:03:46",
+      },
+      {
+        keterangan: "Tiba di Hub SPP SURABAYA",
+        tanggal: "2025-03-18",
+        waktu: "21:05:42",
+      },
+      {
+        keterangan: "Diteruskan ke Hub SPP SURABAYA",
+        tanggal: "2025-03-18",
+        waktu: "13:29:06",
+      },
+      {
+        keterangan: "Diteruskan ke Kantor Antaran SIDOARJO",
+        tanggal: "2025-03-18",
+        waktu: "09:22:14",
+      },
+      {
+        keterangan: "Tiba di Hub SURABAYA",
+        tanggal: "2025-03-18",
+        waktu: "07:02:22",
+      },
+      {
+        keterangan: "Pengiriman di loket SURABAYA",
+        tanggal: "2025-03-15",
+        waktu: "15:56:02",
+      },
+    ],
+  },
 ];
 
-// ==============================
-// DATA DUMMY BAHAN AJAR
-// ==============================
+// ======= DATA DUMMY BAHAN AJAR =======
 const dataBahanAjar = [
   {
-    kodeLokasi: "0TMP01",
-    kodeBarang: "ASIP4301",
-    namaBarang: "Pengantar Ilmu Komunikasi",
+    kodeLokasi: "MLG01",
+    kodeBarang: "SI001",
+    namaBarang: "Pengantar Sistem Informasi",
     jenisBarang: "BMP",
-    edisi: "2",
-    stok: 548,
+    edisi: "3",
+    stok: 420,
   },
   {
-    kodeLokasi: "0SBY02",
-    kodeBarang: "ASIP4302",
-    namaBarang: "Dasar-Dasar Public Relations",
+    kodeLokasi: "MLG02",
+    kodeBarang: "SI002",
+    namaBarang: "Analisis dan Perancangan Sistem Informasi",
+    jenisBarang: "BMP",
+    edisi: "2",
+    stok: 315,
+  },
+  {
+    kodeLokasi: "SBY01",
+    kodeBarang: "SI003",
+    namaBarang: "Manajemen Basis Data",
     jenisBarang: "BMP",
     edisi: "1",
-    stok: 321,
+    stok: 287,
+  },
+  {
+    kodeLokasi: "SBY02",
+    kodeBarang: "SI004",
+    namaBarang: "Pemrograman Web",
+    jenisBarang: "BMP",
+    edisi: "2",
+    stok: 198,
   },
 ];
 
-// ==============================
-// MENAMPILKAN DATA DUMMY KE TABEL
-// ==============================
+
+// ======= MENAMPILKAN DATA DUMMY KE TABEL =======
 function tampilkanData() {
-  const tabel = document.getElementById("tabelStok")?.getElementsByTagName("tbody")[0];
+  const tabel = document
+    .getElementById("tabelStok")
+    ?.getElementsByTagName("tbody")[0];
   if (!tabel) return; // jika bukan halaman stok, keluar
 
   tabel.innerHTML = ""; // kosongkan tabel
 
-  dataBahanAjar.forEach(item => {
+  dataBahanAjar.forEach((item) => {
     const row = tabel.insertRow();
     row.innerHTML = `
       <td>${item.kodeLokasi}</td>
@@ -139,9 +189,7 @@ function tampilkanData() {
   });
 }
 
-// ==============================
-// MENAMBAH BARIS BARU
-// ==============================
+// ======= MENAMBAH BARIS BARU =======
 function tambahBaris() {
   const kodeLokasi = document.getElementById("kodeLokasi").value;
   const kodeBarang = document.getElementById("kodeBarang").value;
@@ -150,7 +198,14 @@ function tambahBaris() {
   const edisi = document.getElementById("edisi").value;
   const stok = document.getElementById("stok").value;
 
-  if (!kodeLokasi || !kodeBarang || !namaBarang || !jenisBarang || !edisi || !stok) {
+  if (
+    !kodeLokasi ||
+    !kodeBarang ||
+    !namaBarang ||
+    !jenisBarang ||
+    !edisi ||
+    !stok
+  ) {
     alert("Semua kolom harus diisi!");
     return;
   }
@@ -165,16 +220,16 @@ function tambahBaris() {
     stok,
   });
 
-  tampilkanData(); // perbarui tampilan tabel
+  tampilkanData(); 
 
   alert("Data stok baru berhasil ditambahkan!");
-  document.querySelectorAll(".form-container input").forEach(i => i.value = "");
+  document
+    .querySelectorAll(".form-container input")
+    .forEach((i) => (i.value = ""));
 }
 
-// ==============================
-// OTOMATIS JALANKAN SAAT HALAMAN DIMUAT
-// ==============================
-document.addEventListener("DOMContentLoaded", function() {
+// ======= OTOMATIS JALANKAN SAAT HALAMAN DIMUAT =======
+document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("tabelStok")) {
     tampilkanData();
   }

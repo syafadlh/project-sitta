@@ -4,12 +4,12 @@
 :root {
   --primary: #004aad;
   --secondary: #fdb813;
-  --shadow: rgba(0,0,0,0.15);
+  --shadow: rgba(0, 0, 0, 0.15);
 }
 
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   background: linear-gradient(135deg, var(--primary), #2d73ff);
   display: flex;
   justify-content: center;
@@ -28,8 +28,14 @@ body {
 }
 
 @keyframes fadeIn {
-  from {opacity: 0; transform: translateY(25px);}
-  to {opacity: 1; transform: translateY(0);}
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .login-container img {
@@ -90,7 +96,7 @@ body {
   display: none;
   position: fixed;
   inset: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;
 }
 

@@ -3,50 +3,109 @@
   --highlight: #2d73ff;
   --secondary: #fdb813;
   --light: #f4f6f8;
-  --font: 'Poppins', sans-serif;
+  --darknav: #012b66; 
+  --font: "Poppins", sans-serif;
 }
 
+/* ===== BASE ===== */
 body {
   margin: 0;
   font-family: var(--font);
-  background: var(--light);
+  background: linear-gradient(180deg, #f7faff 0%, var(--light) 100%);
+  animation: fadeIn 0.8s ease;
 }
 
 /* ===== NAVBAR ===== */
 .navbar {
-  background: linear-gradient(90deg, var(--primary), var(--highlight));
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background: var(--darknav);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
+
 .navbar ul {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
 }
+
 .navbar li a {
   color: white;
   text-decoration: none;
   padding: 14px 20px;
   display: block;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
+
 .navbar li a:hover,
 .navbar li a.active {
   background-color: var(--secondary);
   color: #333;
+  border-radius: 6px;
+}
+
+/* ===== HEADER ===== */
+.stok-header {
+  background: linear-gradient(90deg, var(--primary), var(--highlight));
+  color: white;
+  text-align: center;
+  padding: 40px 0 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border-bottom: 4px solid var(--secondary);
+  animation: slideDown 0.6s ease;
+}
+
+.stok-header h1 {
+  font-size: 2rem;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.stok-header p {
+  font-size: 1rem;
+  opacity: 0.95;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Animasi Header */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ===== CONTAINER ===== */
 .stok-container {
-  padding: 40px 60px;
+  padding: 50px 60px;
   text-align: center;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  max-width: 1000px;
+  margin: 50px auto;
+  animation: fadeUp 0.8s ease both;
 }
+
 h2 {
   color: var(--primary);
   font-size: 1.8rem;
+  margin-bottom: 10px;
 }
+
 p {
   color: #555;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 /* ===== TABLE ===== */
@@ -54,50 +113,166 @@ table {
   width: 100%;
   border-collapse: collapse;
   background-color: white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
 }
+
+table:hover {
+  transform: scale(1.01);
+}
+
 th {
-  background-color: var(--primary);
+  background: linear-gradient(90deg, var(--primary), var(--highlight));
   color: white;
   padding: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
+
 td {
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
+
 tr:hover {
   background-color: #f5f9ff;
+  transition: background 0.3s ease;
 }
 
 /* ===== FORM TAMBAH ===== */
 h3 {
   margin-top: 40px;
   color: var(--primary);
+  font-size: 1.4rem;
 }
+
 .form-container {
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
 }
+
 .form-container input {
   padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  border-radius: 8px;
+  border: 1.8px solid var(--highlight);
   width: 160px;
+  transition: all 0.3s ease;
 }
+
+.form-container input:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 6px rgba(253, 184, 19, 0.4);
+}
+
 .btn-primary {
-  background: var(--primary);
+  background: linear-gradient(90deg, var(--primary), var(--highlight));
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
+  padding: 10px 24px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
+
 .btn-primary:hover {
-  background: var(--highlight);
+  background: var(--secondary);
+  color: #222;
+}
+
+/* ===== MODAL POPUP ===== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  width: 420px;
+  max-width: 90%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: scaleUp 0.3s ease;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: var(--secondary);
+}
+
+/* Animasi popup */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes scaleUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ===== ANIMASI ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media screen and (max-width: 768px) {
+  .stok-container {
+    padding: 30px;
+  }
+
+  .form-container {
+    flex-direction: column;
+  }
+
+  .form-container input {
+    width: 100%;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
 }
