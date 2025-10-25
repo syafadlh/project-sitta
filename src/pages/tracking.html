@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tracking Pengiriman | SITTA</title>
+  <link rel="stylesheet" href="../css/tracking.css">
+</head>
+<body>
+  <header class="tracking-header">
+    <h2>Tracking Pengiriman Bahan Ajar</h2>
+  </header>
+
+  <main class="tracking-container">
+    <div class="search-section">
+      <label for="noDO">No. DO/Billing</label>
+      <div class="input-group">
+        <input type="text" id="noDO" placeholder="Masukkan Nomor DO (contoh: DO001)">
+        <button onclick="cariDO()">Lacak</button>
+      </div>
+    </div>
+
+    <div id="hasilTracking" class="tracking-result"></div>
+  </main>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

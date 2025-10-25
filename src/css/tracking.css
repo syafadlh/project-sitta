@@ -1,0 +1,148 @@
+:root {
+  --primary: #004aad;
+  --highlight: #2d73ff;
+  --secondary: #fdb813;
+  --light: #f9fbff;
+  --font: 'Poppins', sans-serif;
+}
+
+/* ======== BASE ======== */
+body {
+  font-family: var(--font);
+  background-color: var(--light);
+  margin: 0;
+  padding: 0;
+}
+
+/* ======== HEADER ======== */
+.tracking-header {
+  background: linear-gradient(90deg, var(--primary), var(--highlight));
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* ======== CONTAINER ======== */
+.tracking-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* ======== INPUT SECTION ======== */
+.search-section {
+  margin-bottom: 25px;
+}
+
+.search-section label {
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.input-group input:focus {
+  border-color: var(--highlight);
+  box-shadow: 0 0 4px var(--highlight);
+}
+
+.input-group button {
+  background: var(--secondary);
+  color: #222;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.input-group button:hover {
+  background: var(--highlight);
+  color: white;
+}
+
+/* ======== HASIL CARD ======== */
+.tracking-card {
+  background-color: var(--primary);
+  color: white;
+  padding: 18px 20px;
+  border-radius: 12px;
+  margin-top: 25px;
+  line-height: 1.5;
+  position: relative;
+}
+
+.tracking-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.tracking-card p {
+  margin: 3px 0;
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+
+.tracking-card small {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 0.85rem;
+  color: #e0e0e0;
+}
+
+/* ======== TIMELINE ======== */
+.timeline {
+  margin-top: 25px;
+  border-left: 3px solid var(--secondary);
+  padding-left: 20px;
+  position: relative;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.timeline-item::before {
+  content: "●";
+  color: var(--secondary);
+  font-size: 1rem;
+  position: absolute;
+  left: -13px;
+  top: 0;
+  background: white;
+  border-radius: 50%;
+}
+
+.timeline-item p {
+  margin: 3px 0;
+  color: #333;
+  font-size: 0.92rem;
+}
+
+.timeline-item span {
+  display: block;
+  color: #666;
+  font-size: 0.85rem;
+  margin-top: 2px;
+}
