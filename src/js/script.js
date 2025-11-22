@@ -6,6 +6,22 @@ function login() {
   window.location.href = "dashboard.html";
 }
 
+function login() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  // 🔹 Email & password yang benar (simulasi)
+  const validEmail = "admin@sitta.ac.id";
+  const validPassword = "admin123";
+
+  if (email === validEmail && password === validPassword) {
+    alert("Login berhasil! Selamat datang di SITTA 🎉");
+    window.location.href = "dashboard.html"; // arahkan ke dashboard
+  } else {
+    alert("Email atau password salah! Silakan coba lagi.");
+  }
+}
+
 // ======= GREETING OTOMATIS =======
 if (document.getElementById("greeting")) {
   const jam = new Date().getHours();
@@ -130,43 +146,6 @@ const dataTracking = [
   },
 ];
 
-// ======= DATA DUMMY BAHAN AJAR =======
-const dataBahanAjar = [
-  {
-    kodeLokasi: "MLG01",
-    kodeBarang: "SI001",
-    namaBarang: "Pengantar Sistem Informasi",
-    jenisBarang: "BMP",
-    edisi: "3",
-    stok: 420,
-  },
-  {
-    kodeLokasi: "MLG02",
-    kodeBarang: "SI002",
-    namaBarang: "Analisis dan Perancangan Sistem Informasi",
-    jenisBarang: "BMP",
-    edisi: "2",
-    stok: 315,
-  },
-  {
-    kodeLokasi: "SBY01",
-    kodeBarang: "SI003",
-    namaBarang: "Manajemen Basis Data",
-    jenisBarang: "BMP",
-    edisi: "1",
-    stok: 287,
-  },
-  {
-    kodeLokasi: "SBY02",
-    kodeBarang: "SI004",
-    namaBarang: "Pemrograman Web",
-    jenisBarang: "BMP",
-    edisi: "2",
-    stok: 198,
-  },
-];
-
-
 // ======= MENAMPILKAN DATA DUMMY KE TABEL =======
 function tampilkanData() {
   const tabel = document
@@ -220,7 +199,7 @@ function tambahBaris() {
     stok,
   });
 
-  tampilkanData(); 
+  tampilkanData();
 
   alert("Data stok baru berhasil ditambahkan!");
   document

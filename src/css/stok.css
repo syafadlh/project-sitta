@@ -276,3 +276,100 @@ h3 {
     width: 100%;
   }
 }
+/* CARD STYLE */
+.styled-filter-box {
+  background: linear-gradient(135deg, #ffffff, #f6f9fc);
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-bottom: 30px;
+  border-left: 6px solid #3a8cff;
+  transition: 0.3s;
+}
+.styled-filter-box:hover {
+  transform: scale(1.01);
+}
+
+/* HEADER CARD */
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.filter-header h3 {
+  font-size: 20px;
+  color: #0a3d62;
+  margin: 0;
+}
+
+/* GRID */
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+
+/* ITEM */
+.filter-item label {
+  font-weight: bold;
+  color: #34495e;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* INPUT & SELECT */
+.filter-input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: 0.2s;
+}
+.filter-input:focus {
+  outline: none;
+  border: 1px solid #3a8cff;
+  box-shadow: 0 0 6px rgba(58,140,255,0.6);
+}
+
+/* CHECKBOX */
+.checkbox-group {
+  display: flex;
+  align-items: center;
+}
+.checkbox-label {
+  background: #fff3cd;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border-left: 4px solid #ff9800;
+  font-weight: bold;
+}
+
+/* BUTTON RESET */
+.btn-reset {
+  background: #ff4d4d;
+  color: white;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-reset:hover {
+  background: #c0392b;
+  transform: scale(1.05);
+}
+.status-aman {
+  color: green;
+  font-weight: bold;
+}
+
+.status-menipis {
+  color: orange;
+  font-weight: bold;
+}
+
+.status-kosong {
+  color: red;
+  font-weight: bold;
+}

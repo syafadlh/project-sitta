@@ -32,49 +32,160 @@
       <h1>Informasi Stok Bahan Ajar</h1>
     </header>
 
-    <!-- Container -->
-    <section class="stok-container">
-      <table id="tabelStok">
-        <thead>
-          <tr>
-            <th>Kode Lokasi</th>
-            <th>Kode Barang</th>
-            <th>Nama Barang</th>
-            <th>Jenis</th>
-            <th>Edisi</th>
-            <th>Stok</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+    <!-- CONTAINER VUE -->
+    <div id="app">
+      <!-- FILTER & SORT -->
+<div class="filter-container styled-filter-box">
+  <div class="filter-header">
+    <h3>📦 Filter & Sorting Stock Bahan Ajar</h3>
+    <button class="btn-reset" @click="resetFilter">
+      🔄 Reset
+    </button>
+  </div>
 
-      <div style="margin-top: 30px">
-        <button class="btn-primary" onclick="openModal()">
-          + Tambah Stok Baru
-        </button>
-      </div>
-    </section>
+  <div class="filter-grid">
+    <div class="filter-item">
+      <label><i class="fas fa-map-marker-alt"></i> UT-Daerah</label>
+      <select v-model="selectedUpbjj" class="filter-input">
+        <option value="">Semua</option>
+        <option v-for="u in upbjjList" :key="u">{{ u }}</option>
+      </select>
+    </div>
 
-    <!-- POPUP MODAL -->
-    <div id="popupModal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h3>Tambah Stok Baru</h3>
-        <div class="form-container">
-          <input type="text" id="kodeLokasi" placeholder="Kode Lokasi" />
-          <input type="text" id="kodeBarang" placeholder="Kode Barang" />
-          <input type="text" id="namaBarang" placeholder="Nama Barang" />
-          <input type="text" id="jenisBarang" placeholder="Jenis Barang" />
-          <input type="number" id="edisi" placeholder="Edisi" />
-          <input type="number" id="stok" placeholder="Jumlah Stok" />
-          <button class="btn-primary" onclick="tambahBaris()">Simpan</button>
+    <div class="filter-item" v-if="selectedUpbjj">
+      <label><i class="fas fa-list-alt"></i> Kategori</label>
+      <select v-model="selectedKategori" class="filter-input">
+        <option value="">Semua</option>
+        <option v-for="k in kategoriList" :key="k">{{ k }}</option>
+      </select>
+    </div>
+
+    <div class="filter-item">
+      <label><i class="fas fa-sort-amount-up"></i> Urutkan</label>
+      <select v-model="sortBy" class="filter-input">
+        <option value="">Default</option>
+        <option value="judul">Nama Mata Kuliah</option>
+        <option value="qty">Stok (Qty)</option>
+      </select>
+    </div>
+
+    <div class="filter-item checkbox-group">
+      <label class="checkbox-label">
+        <input type="checkbox" v-model="onlyWarning">
+        ⚠ Stok Menipis / Habis
+      </label>
+    </div>
+  </div>
+</div>
+
+
+      <!-- TABLE -->
+      <section class="stok-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Kode Mata Kuliah</th>
+              <th>Nama Mata Kuliah</th>
+              <th>Kategori</th>
+              <th>UT-Daerah</th>
+              <th>Lokasi Rak</th>
+              <th>Jumlah Stok</th>
+              <th>Safety Stok</th>
+              <th>Status</th>
+              <th>Catatan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in filteredData" :key="item.kode">
+              <td>{{ item.kode }}</td>
+              <td>{{ item.judul }}</td>
+              <td>{{ item.kategori }}</td>
+              <td>{{ item.upbjj }}</td>
+              <td>{{ item.lokasiRak }}</td>
+              <td>{{ item.qty }}</td>
+              <td>{{ item.safety }}</td>
+              <td>
+                <span
+                  v-if="item.qty < item.safety"
+                  style="color: red; font-weight: bold"
+                  >Menipis</span
+                >
+                <span v-else style="color: green; font-weight: bold">Aman</span>
+              </td>
+              <td v-html="item.catatanHTML"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- TOMBOL MODAL -->
+        <div style="margin-top: 30px">
+          <button class="btn-primary" onclick="openModal()">
+            + Tambah Stok Baru
+          </button>
+        </div>
+      </section>
+
+      <!-- MODAL -->
+      <div id="popupModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <h3>Tambah Stok Baru</h3>
+          <div class="form-container">
+            <input
+              v-model="newItem.kode"
+              type="text"
+              placeholder="Kode Mata Kuliah"
+            />
+            <input
+              v-model="newItem.judul"
+              type="text"
+              placeholder="Nama Mata Kuliah"
+            />
+            <input
+              v-model="newItem.kategori"
+              type="text"
+              placeholder="Kategori Mata Kuliah"
+            />
+            <input
+              v-model="newItem.upbjj"
+              type="text"
+              placeholder="UT-Daerah (UPBJJ)"
+            />
+            <input
+              v-model="newItem.lokasiRak"
+              type="text"
+              placeholder="Lokasi Rak"
+            />
+            <input
+              v-model.number="newItem.qty"
+              type="number"
+              placeholder="Jumlah Stok"
+            />
+            <input
+              v-model.number="newItem.safety"
+              type="number"
+              placeholder="Safety Stok"
+            />
+            <input
+              v-model="newItem.catatanHTML"
+              type="text"
+              placeholder="Catatan"
+            />
+
+            <button class="btn-primary" @click="tambahBaris">Simpan</button>
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- SCRIPTS -->
+    <script src="../js/dataBahanAjar.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="../js/stok-app.js"></script>
     <script src="../js/script.js"></script>
+
     <script>
-      // Dropdown
+      // Dropdown System
       function toggleDropdown() {
         const dropdown = document.getElementById("laporanDropdown");
         dropdown.style.display =
@@ -93,7 +204,6 @@
         if (e.target === modal) closeModal();
       };
 
-      // Modal Functions
       function openModal() {
         document.getElementById("popupModal").style.display = "flex";
       }
