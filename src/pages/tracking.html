@@ -8,13 +8,12 @@
     <link rel="stylesheet" href="../css/dashboard.css" />
   </head>
   <body>
-    <!-- Navigasi Utama -->
+    <!-- NAVBAR -->
     <nav class="navbar">
       <ul>
-        <li><a href="dashboard.html">Dashboard</a></li> 
+        <li><a href="dashboard.html">Dashboard</a></li>
         <li><a href="stok.html">Informasi Bahan Ajar</a></li>
-        <li><a href="tracking.html">Tracking Pengiriman</a></li>
-
+        <li><a href="tracking.html" class="active">Tracking Pengiriman</a></li>
         <li class="dropdown">
           <button class="dropbtn" onclick="toggleDropdown()">Laporan ▾</button>
           <div class="dropdown-content" id="laporanDropdown">
@@ -22,51 +21,146 @@
             <a href="#">Rekap Bahan Ajar</a>
           </div>
         </li>
-
-        <!-- 🔹 Tambahkan tombol Login / Logout -->
         <li class="right">
           <a href="login.html" class="logout-btn">Logout</a>
         </li>
       </ul>
     </nav>
+
+    <!-- HEADER -->
     <header class="tracking-header">
       <h2>Tracking Pengiriman Bahan Ajar</h2>
     </header>
 
-    <main class="tracking-container">
-      <div class="search-section">
-        <label for="noDO">No. DO/Billing</label>
-        <div class="input-group">
-          <input
-            type="text"
-            id="noDO"
-            placeholder="Masukkan Nomor DO (contoh: DO001)"
-          />
-          <button onclick="cariDO()">Lacak</button>
+    <!-- VUE APP -->
+    <main id="app" class="tracking-container">
+      <!-- 🔍 PENCARIAN DO -->
+<div class="search-section">
+  <label for="noDO">No. DO/Billing</label>
+  <div class="input-group">
+    <input type="text" v-model="inputDO" placeholder="DO2025-001" />
+    <button @click="cariDO">Lacak</button>   <!-- HARUS ADA @click -->
+  </div>
+</div>
+
+
+      <!-- HASIL TRACKING -->
+      <div v-if="hasil" class="tracking-result">
+        <div class="tracking-card">
+          <h3>{{ hasil.nama }}</h3>
+          <p><strong>Nomor:</strong> {{ hasil.noDO }}</p>
+          <p>{{ hasil.asal }} ➜ {{ hasil.tujuan }}</p>
+          <p>{{ hasil.alamat }}</p>
+          <small>{{ hasil.tanggal }} {{ hasil.waktu }}</small>
+        </div>
+
+        <h4>Status Perjalanan:</h4>
+        <div class="timeline">
+          <div
+            v-for="(step,i) in hasil.perjalanan"
+            :key="i"
+            class="timeline-item"
+          >
+            <p><strong>{{ step.keterangan }}</strong></p>
+            <span>{{ step.tanggal }} {{ step.waktu }}</span>
+          </div>
         </div>
       </div>
+      <p v-else-if="inputDO" class="not-found">❌ Nomor DO tidak ditemukan</p>
 
-      <div id="hasilTracking" class="tracking-result"></div>
+      <hr />
+
+      <!-- FORM INPUT DO BARU -->
+<h3>📦 Tambah Pengiriman Baru</h3>
+<div class="form-container">
+
+  <div class="input-row">
+    <label>NIM Mahasiswa</label>
+    <input type="text" v-model="newDO.nim" placeholder="Masukkan NIM" />
+  </div>
+
+  <div class="input-row">
+    <label>Nama Mahasiswa</label>
+    <input type="text" v-model="newDO.nama" placeholder="Nama Lengkap" />
+  </div>
+
+  <!-- EKSPEDISI -->
+  <div class="input-row">
+    <label>Ekspedisi</label>
+    <select v-model="newDO.ekspedisi">
+      <option value="">-- Pilih Ekspedisi --</option>
+      <option v-for="e in ekspedisiList" :key="e">{{ e }}</option>
+    </select>
+  </div>
+
+  <!-- PAKET -->
+  <div class="input-row">
+    <label>Paket Bahan Ajar</label>
+    <select v-model="newDO.paket">
+      <option value="">-- Pilih Paket Bahan Ajar --</option>
+      <option v-for="p in paketList" :key="p.kode" :value="p.kode">
+        {{ p.kode }} - {{ p.nama }}
+      </option>
+    </select>
+  </div>
+
+  <!-- DETAIL PAKET OTOMATIS -->
+  <div class="detail-paket" v-if="paketDipilih">
+    <p><strong>📘 Isi Paket:</strong></p>
+    <ul>
+      <li v-for="item in paketDipilih.isi" :key="item">{{ item }}</li>
+    </ul>
+    <p><strong>💰 Harga Total:</strong> Rp {{ paketDipilih.harga }}</p>
+  </div>
+
+  <!-- TANGGAL -->
+  <div class="input-row">
+    <label>Tanggal Kirim</label>
+    <input type="date" v-model="newDO.tanggalKirim" />
+  </div>
+
+  <button @click="tambahTracking" class="btn-primary">➕ Simpan DO</button>
+</div>
+
+
+      <!-- 📄 LIST SEMUA DATA -->
+<h3>📄 Daftar Semua Pengiriman</h3>
+
+<table v-if="dataTracking.length > 0" class="table-do modern-table">
+  <thead>
+    <tr>
+      <th>No DO</th>
+      <th>NIM</th>
+      <th>Nama</th>
+      <th>Ekspedisi</th>
+      <th>Total Harga</th>
+      <th>Tanggal Kirim</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="pengiriman in dataTracking" :key="pengiriman.noDO">
+      <td>{{ pengiriman.noDO }}</td>
+      <td>{{ pengiriman.nim }}</td>
+      <td>{{ pengiriman.nama }}</td>
+      <td>{{ pengiriman.ekspedisi }}</td>
+      <td>Rp {{ pengiriman.totalHarga || '-' }}</td>
+      <td>{{ pengiriman.tanggal }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<p v-else class="no-data">Belum ada data pengiriman.</p>
+
     </main>
 
+    <!-- SCRIPT URUTAN PALING BENAR -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Vue dulu -->
+    <script src="../js/paketBahanAjar.js"></script>
+    <!-- DATA -->
+    <script src="../js/tracking-app.js"></script>
+    <!-- Vue logic -->
     <script src="../js/script.js"></script>
-    <script>
-      // JavaScript untuk toggle dropdown
-      function toggleDropdown() {
-        const dropdown = document.getElementById("laporanDropdown");
-        dropdown.style.display =
-          dropdown.style.display === "block" ? "none" : "block";
-      }
-
-      // Tutup dropdown jika klik di luar menu
-      window.onclick = function (e) {
-        if (!e.target.matches(".dropbtn")) {
-          const dropdown = document.getElementById("laporanDropdown");
-          if (dropdown && dropdown.style.display === "block") {
-            dropdown.style.display = "none";
-          }
-        }
-      };
-    </script>
+    <!-- Navbar -->
   </body>
 </html>
