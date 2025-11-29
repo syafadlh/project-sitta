@@ -92,7 +92,7 @@ body {
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  max-width: 1000px;
+  max-width: 2000px;
   margin: 50px auto;
   animation: fadeUp 0.8s ease both;
 }
@@ -336,6 +336,8 @@ h3 {
 .checkbox-group {
   display: flex;
   align-items: center;
+  margin-left: 30px;   /* jarak samping */
+  margin-top: 20px;  
 }
 .checkbox-label {
   background: #fff3cd;
@@ -373,3 +375,197 @@ h3 {
   color: red;
   font-weight: bold;
 }
+
+/* === STOCK TABLE STYLE (khusus komponen <stock-table>) === */
+
+.stock-table {
+  margin-top: 25px;
+  overflow-x: auto;
+}
+
+.stock-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  animation: fadeUp 0.5s ease;
+}
+
+.stock-table th {
+  background: linear-gradient(90deg, var(--primary), var(--highlight));
+  color: #fff;
+  padding: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+}
+
+.stock-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.stock-table tr:hover {
+  background-color: #f0f6ff;
+  transition: 0.25s;
+}
+
+/* === WARNA STATUS STOK === */
+.status-aman {
+  color: green;
+  font-weight: bold;
+}
+
+.status-menipis {
+  color: orange;
+  font-weight: bold;
+}
+
+.status-kosong {
+  color: red;
+  font-weight: bold;
+}
+
+/* === BUTTON NAV (Jika tidak pakai .navbar ul) === */
+nav button {
+  padding: 10px 18px;
+  margin: 10px 6px 0;
+  border: none;
+  background: linear-gradient(90deg, var(--primary), var(--highlight));
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+nav button:hover {
+  background: var(--secondary);
+  color: #222;
+}
+
+/* Active tab (opsional, jika ingin tab yang sedang dipilih menyala) */
+nav button.active {
+  background: var(--secondary);
+  color: #222;
+}
+
+.checkbox-label-menipis {
+  background: #fff3cd;
+  border-left: 4px solid #ff9800;
+}
+
+.checkbox-label-habis {
+  background: #ffe0e0;
+  border-left: 4px solid #e60000;
+  margin-left: -130px;
+}
+
+.form-container label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-weight: 600;
+  color: #0a3d62;
+  gap: 4px;
+}
+
+.form-container label span {
+  font-size: 14px;
+}
+
+.form-container input {
+  margin-top: 2px;
+}
+.form-horizontal {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.form-row label {
+  flex: 0 0 160px; /* lebar label */
+  font-weight: 600;
+}
+
+.form-row input {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-delete {
+  background: linear-gradient(90deg, #d32f2f, #ff5252); /* merah gradasi */
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+  background: #b71c1c; /* merah gelap saat hover */
+  color: #fff;
+}
+
+      .status-aman {
+        color: #1e7e34;
+        font-weight: 700;
+      }
+      .status-menipis {
+        color: #ff8c00;
+        font-weight: 700;
+      }
+      .status-kosong {
+        color: #c82333;
+        font-weight: 700;
+      }
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 999;
+      }
+      .modal-box {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        width: 420px;
+        max-width: 90%;
+      }
+      .table-actions button {
+        margin-right: 6px;
+      }
+      .tooltip-preview {
+        position: absolute;
+        background: #fff;
+        border: 1px solid #ddd;
+        padding: 8px;
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+        white-space: pre-wrap;
+        z-index: 2000;
+      }

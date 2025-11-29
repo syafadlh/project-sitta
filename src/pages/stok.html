@@ -14,13 +14,6 @@
         <li><a href="dashboard.html">Dashboard</a></li>
         <li><a href="stok.html" class="active">Informasi Bahan Ajar</a></li>
         <li><a href="tracking.html">Tracking Pengiriman</a></li>
-        <li class="dropdown">
-          <button class="dropbtn" onclick="toggleDropdown()">Laporan ▾</button>
-          <div class="dropdown-content" id="laporanDropdown">
-            <a href="#">Monitoring Progress DO Bahan Ajar</a>
-            <a href="#">Rekap Bahan Ajar</a>
-          </div>
-        </li>
         <li class="right">
           <a href="login.html" class="logout-btn">Logout</a>
         </li>
@@ -35,53 +28,67 @@
     <!-- CONTAINER VUE -->
     <div id="app">
       <!-- FILTER & SORT -->
-<div class="filter-container styled-filter-box">
-  <div class="filter-header">
-    <h3>📦 Filter & Sorting Stock Bahan Ajar</h3>
-    <button class="btn-reset" @click="resetFilter">
-      🔄 Reset
-    </button>
-  </div>
+      <div class="filter-container styled-filter-box">
+        <div class="filter-header">
+          <h3>📦 Filter & Sorting Stock Bahan Ajar</h3>
+          <button class="btn-reset" @click="resetFilter">🔄 Reset</button>
+        </div>
 
-  <div class="filter-grid">
-    <div class="filter-item">
-      <label><i class="fas fa-map-marker-alt"></i> UT-Daerah</label>
-      <select v-model="selectedUpbjj" class="filter-input">
-        <option value="">Semua</option>
-        <option v-for="u in upbjjList" :key="u">{{ u }}</option>
-      </select>
-    </div>
+        <div class="filter-grid">
+          <div class="filter-item">
+            <label><i class="fas fa-map-marker-alt"></i> UT-Daerah</label>
+            <select v-model="selectedUpbjj" class="filter-input">
+              <option value="">Semua</option>
+              <option v-for="u in upbjjList" :key="u">{{ u }}</option>
+            </select>
+          </div>
 
-    <div class="filter-item" v-if="selectedUpbjj">
-      <label><i class="fas fa-list-alt"></i> Kategori</label>
-      <select v-model="selectedKategori" class="filter-input">
-        <option value="">Semua</option>
-        <option v-for="k in kategoriList" :key="k">{{ k }}</option>
-      </select>
-    </div>
+          <div class="filter-item">
+            <label><i class="fas fa-list-alt"></i> Kategori</label>
+            <select v-model="selectedKategori" class="filter-input">
+              <option value="">Semua</option>
+              <option v-if="!selectedUpbjj" disabled>
+                -- Pilih UPBJJ terlebih dahulu --
+              </option>
+              <option
+                v-for="k in kategoriListForSelectedUpbjj"
+                :key="k"
+                v-if="selectedUpbjj"
+              >
+                {{ k }}
+              </option>
+            </select>
+          </div>
 
-    <div class="filter-item">
-      <label><i class="fas fa-sort-amount-up"></i> Urutkan</label>
-      <select v-model="sortBy" class="filter-input">
-        <option value="">Default</option>
-        <option value="judul">Nama Mata Kuliah</option>
-        <option value="qty">Stok (Qty)</option>
-      </select>
-    </div>
+          <div class="filter-item">
+            <label><i class="fas fa-sort-amount-up"></i> Urutkan</label>
+            <select v-model="sortBy" class="filter-input">
+              <option value="">Default</option>
+              <option value="judul">Nama Mata Kuliah (A→Z)</option>
+              <option value="qty">Stok (Qty) - ascending</option>
+              <option value="harga">Harga - ascending</option>
+            </select>
+          </div>
 
-    <div class="filter-item checkbox-group">
-      <label class="checkbox-label">
-        <input type="checkbox" v-model="onlyWarning">
-        ⚠ Stok Menipis / Habis
-      </label>
-    </div>
-  </div>
-</div>
+          <div class="filter-item checkbox-group">
+            <label class="checkbox-label checkbox-label-menipis">
+              <input type="checkbox" v-model="filterMenipis" />
+              🟧 Stok Menipis
+            </label>
+          </div>
 
+          <div class="filter-item checkbox-group">
+            <label class="checkbox-label checkbox-label-habis">
+              <input type="checkbox" v-model="filterHabis" />
+              🔴 Stok Habis
+            </label>
+          </div>
+        </div>
+      </div>
 
       <!-- TABLE -->
       <section class="stok-container">
-        <table>
+        <table id="tabelStok">
           <thead>
             <tr>
               <th>Kode Mata Kuliah</th>
@@ -89,127 +96,140 @@
               <th>Kategori</th>
               <th>UT-Daerah</th>
               <th>Lokasi Rak</th>
+              <th>Harga</th>
               <th>Jumlah Stok</th>
               <th>Safety Stok</th>
               <th>Status</th>
-              <th>Catatan</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in filteredData" :key="item.kode">
+            <tr v-for="(item, idx) in filteredData" :key="item.kode">
               <td>{{ item.kode }}</td>
               <td>{{ item.judul }}</td>
               <td>{{ item.kategori }}</td>
               <td>{{ item.upbjj }}</td>
               <td>{{ item.lokasiRak }}</td>
-              <td>{{ item.qty }}</td>
-              <td>{{ item.safety }}</td>
-              <td>
+              <td>{{ formatCurrency(item.harga) }}</td>
+              <td>{{ formatQty(item.qty) }}</td>
+              <td>{{ formatQty(item.safety) }}</td>
+              <td style="position: relative">
+                <!-- status with tooltip on hover -->
                 <span
-                  v-if="item.qty < item.safety"
-                  style="color: red; font-weight: bold"
-                  >Menipis</span
-                >
-                <span v-else style="color: green; font-weight: bold">Aman</span>
+                  v-html="getStatusHtml(item)"
+                  @mouseenter="showNotePreview($event, item.catatanHTML)"
+                  @mouseleave="hideNotePreview"
+                ></span>
               </td>
-              <td v-html="item.catatanHTML"></td>
+              <td class="table-actions">
+                <button class="btn-primary" @click="openEditModal(idx)">
+                  Update
+                </button>
+<button class="btn-delete" @click="confirmDelete(idx)">
+  Delete
+</button>
+
+              </td>
+            </tr>
+            <tr v-if="filteredData.length === 0">
+              <td colspan="10" style="text-align: center; padding: 14px">
+                Tidak ada data.
+              </td>
             </tr>
           </tbody>
         </table>
 
         <!-- TOMBOL MODAL -->
-        <div style="margin-top: 30px">
-          <button class="btn-primary" onclick="openModal()">
+        <div style="margin-top: 20px">
+          <button class="btn-primary" @click="openAddModal()">
             + Tambah Stok Baru
           </button>
         </div>
       </section>
 
-      <!-- MODAL -->
-      <div id="popupModal" class="modal">
-        <div class="modal-content">
-          <span class="close" onclick="closeModal()">&times;</span>
-          <h3>Tambah Stok Baru</h3>
-          <div class="form-container">
-            <input
-              v-model="newItem.kode"
-              type="text"
-              placeholder="Kode Mata Kuliah"
-            />
-            <input
-              v-model="newItem.judul"
-              type="text"
-              placeholder="Nama Mata Kuliah"
-            />
-            <input
-              v-model="newItem.kategori"
-              type="text"
-              placeholder="Kategori Mata Kuliah"
-            />
-            <input
-              v-model="newItem.upbjj"
-              type="text"
-              placeholder="UT-Daerah (UPBJJ)"
-            />
-            <input
-              v-model="newItem.lokasiRak"
-              type="text"
-              placeholder="Lokasi Rak"
-            />
-            <input
-              v-model.number="newItem.qty"
-              type="number"
-              placeholder="Jumlah Stok"
-            />
-            <input
-              v-model.number="newItem.safety"
-              type="number"
-              placeholder="Safety Stok"
-            />
-            <input
-              v-model="newItem.catatanHTML"
-              type="text"
-              placeholder="Catatan"
-            />
-
-            <button class="btn-primary" @click="tambahBaris">Simpan</button>
+      <!-- MODAL (ADD / EDIT) -->
+      <div v-if="showModal" class="modal-overlay" @click.self="closeModal">
+        <div class="modal-box" role="dialog" aria-modal="true">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <h3>{{ isEditing ? 'Update Stok' : 'Tambah Stok Baru' }}</h3>
+            <button @click="closeModal">✕</button>
           </div>
+          <form @submit.prevent="submitForm" class="form-horizontal">
+            <div class="form-row">
+              <label>Kode Mata Kuliah</label>
+              <input v-model="form.kode" type="text" required />
+            </div>
+
+            <div class="form-row">
+              <label>Nama Mata Kuliah</label>
+              <input v-model="form.judul" type="text" required />
+            </div>
+
+            <div class="form-row">
+              <label>Kategori Mata Kuliah</label>
+              <input v-model="form.kategori" type="text" required />
+            </div>
+
+            <div class="form-row">
+              <label>UPBJJ (UT-Daerah)</label>
+              <input v-model="form.upbjj" type="text" required />
+            </div>
+
+            <div class="form-row">
+              <label>Lokasi Rak</label>
+              <input v-model="form.lokasiRak" type="text" required />
+            </div>
+
+            <div class="form-row">
+              <label>Harga (angka)</label>
+              <input v-model.number="form.harga" type="number" required />
+            </div>
+
+            <div class="form-row">
+              <label>Jumlah Stok</label>
+              <input v-model.number="form.qty" type="number" required />
+            </div>
+
+            <div class="form-row">
+              <label>Safety Stok</label>
+              <input v-model.number="form.safety" type="number" required />
+            </div>
+
+            <div class="form-row">
+              <label>Catatan (tooltip)</label>
+              <input v-model="form.catatanHTML" type="text" />
+            </div>
+
+            <div class="button-row">
+              <button type="button" class="btn-secondary" @click="closeModal">
+                Batal
+              </button>
+              <button type="submit" class="btn-primary">
+                {{ isEditing ? 'Update' : 'Simpan' }}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
+
+      <!-- tooltip preview -->
+      <div
+        v-if="tooltip.visible"
+        :style="{ top: tooltip.y + 'px', left: tooltip.x + 'px' }"
+        class="tooltip-preview"
+        v-html="tooltip.html"
+      ></div>
     </div>
 
     <!-- SCRIPTS -->
     <script src="../js/dataBahanAjar.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="../js/stok-app.js"></script>
-    <script src="../js/script.js"></script>
-
-    <script>
-      // Dropdown System
-      function toggleDropdown() {
-        const dropdown = document.getElementById("laporanDropdown");
-        dropdown.style.display =
-          dropdown.style.display === "block" ? "none" : "block";
-      }
-
-      window.onclick = function (e) {
-        const dropdown = document.getElementById("laporanDropdown");
-        const modal = document.getElementById("popupModal");
-        if (
-          !e.target.matches(".dropbtn") &&
-          dropdown.style.display === "block"
-        ) {
-          dropdown.style.display = "none";
-        }
-        if (e.target === modal) closeModal();
-      };
-
-      function openModal() {
-        document.getElementById("popupModal").style.display = "flex";
-      }
-      function closeModal() {
-        document.getElementById("popupModal").style.display = "none";
-      }
-    </script>
   </body>
 </html>
